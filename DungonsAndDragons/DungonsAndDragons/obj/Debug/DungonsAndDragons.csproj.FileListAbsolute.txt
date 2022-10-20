@@ -1,0 +1,7 @@
+C:\Users\erikc\Documents\GitHub\Hadanka\DungonsAndDragons\DungonsAndDragons\DungonsAndDragons\bin\Debug\DungonsAndDragons.exe.config
+C:\Users\erikc\Documents\GitHub\Hadanka\DungonsAndDragons\DungonsAndDragons\DungonsAndDragons\bin\Debug\DungonsAndDragons.exe
+C:\Users\erikc\Documents\GitHub\Hadanka\DungonsAndDragons\DungonsAndDragons\DungonsAndDragons\bin\Debug\DungonsAndDragons.pdb
+C:\Users\erikc\Documents\GitHub\Hadanka\DungonsAndDragons\DungonsAndDragons\DungonsAndDragons\obj\Debug\DungonsAndDragons.csproj.AssemblyReference.cache
+C:\Users\erikc\Documents\GitHub\Hadanka\DungonsAndDragons\DungonsAndDragons\DungonsAndDragons\obj\Debug\DungonsAndDragons.csproj.CoreCompileInputs.cache
+C:\Users\erikc\Documents\GitHub\Hadanka\DungonsAndDragons\DungonsAndDragons\DungonsAndDragons\obj\Debug\DungonsAndDragons.exe
+C:\Users\erikc\Documents\GitHub\Hadanka\DungonsAndDragons\DungonsAndDragons\DungonsAndDragons\obj\Debug\DungonsAndDragons.pdb
