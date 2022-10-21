@@ -9,10 +9,6 @@ namespace DungonsAndDragons
     class Dungon
     {
         int miestnostSPascou, miestnostSPokladom, miestnostSPriserou, miestnostSPrazdnotou, celkovichMiestonsti;
-        void Dugon()
-        {
-            genarateRooms();
-        }
         public int genarateRooms()
         {
             if (celkovichMiestonsti == 100) 
@@ -32,22 +28,12 @@ namespace DungonsAndDragons
                         miestnostSPascou++;
                         return 1;
                     }
-                    else
-                    {
-                        genarateRooms();
-                        return 0;
-                    }
                     break;
                 case 2:
                     if (!(miestnostSPokladom > 30))
                     {
                         miestnostSPokladom++;
                         return 2;
-                    }
-                    else
-                    {
-                        genarateRooms();
-                        return 0;
                     }
                     break;
                 case 3:
@@ -57,21 +43,12 @@ namespace DungonsAndDragons
                         return 3;
                     }
                     else
-                    {
-                        genarateRooms();
-                        return 0;
-                    }
                     break;
                 case 4:
                     if (!(miestnostSPrazdnotou > 10))
                     {
                         miestnostSPrazdnotou++;
                         return 4;
-                    }
-                    else
-                    {
-                        genarateRooms();
-                        return 0;
                     }
                     break;
                     
