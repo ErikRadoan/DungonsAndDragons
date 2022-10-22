@@ -119,7 +119,31 @@ namespace DungonsAndDragons
 
             void miestPasca() 
             {
-                Console.WriteLine("Pasca");
+                string pasca = "";
+                Random rd = new Random();
+                int rand_num = rd.Next(1, 5);
+                switch (rand_num)
+                {
+                    case 1:
+                        pasca = "boli spiky [- 1 život]";
+                        player.setPlayerStarts("HP", player.getPlayerStats("HP") - 1);
+
+                        break;
+                    case 2:
+                        pasca = "bol rolling stone [- 2 energie]";
+                        player.setPlayerStarts("Energia", player.getPlayerStats("Energia") - 2);
+                        break;
+                    case 3:
+                        pasca = "bol acid [- 1 Sila do buduceho fightu]";
+                        player.setPlayerStarts("Sila", player.getPlayerStats("Sila") - 1);
+                        break;
+                    case 4:
+                        pasca = "bol waterfall [- 10% gold]";
+                        player.setPlayerStarts("Gold", (player.getPlayerStats("Gold")/10)*9);
+                        break;
+
+                }
+                Console.WriteLine("V miestnosti " + pasca);
                 continuing();
             }
             void miestpoklad()

@@ -11,6 +11,7 @@ namespace DungonsAndDragons
         int zivoty = 5;
         int energia = 12;
         int sila = 0;
+        int gold = 0;
 
         public int getPlayerStats(string druh) 
         {
@@ -24,6 +25,9 @@ namespace DungonsAndDragons
                     break;
                 case "Sila":
                     return sila;
+                    break;
+                case "Gold":
+                    return gold;
                     break;
             }
             return 0;
@@ -41,6 +45,9 @@ namespace DungonsAndDragons
                     break;
                 case "Sila":
                     sila = mnozstvo;
+                    break;
+                case "Gold":
+                    gold = mnozstvo;
                     break;
             }
         }
