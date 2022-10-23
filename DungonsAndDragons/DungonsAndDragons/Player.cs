@@ -10,7 +10,7 @@ namespace DungonsAndDragons
     {
         int zivoty = 5;
         int energia = 12;
-        int sila = 0;
+        int sila = 2;
         int gold = 0;
 
         public int getPlayerStats(string druh) 
