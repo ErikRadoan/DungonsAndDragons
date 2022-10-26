@@ -11,7 +11,9 @@ namespace DungonsAndDragons
         static void Main(string[] args)
         {
             Dungon dungon = new Dungon();
+            Zbrane zbrane = new Zbrane();
             Player player = new Player();
+            Random random = new Random();
 
             startGame();
 
@@ -120,8 +122,7 @@ namespace DungonsAndDragons
             void miestPasca()
             {
                 string pasca = "";
-                Random rd = new Random();
-                int rand_num = rd.Next(1, 5);
+                int rand_num = random.Next(1, 5);
                 switch (rand_num)
                 {
                     case 1:
@@ -148,6 +149,12 @@ namespace DungonsAndDragons
             }
             void miestpoklad()
             {
+                int predosli = zbrane.GetPower();
+                zbrane.GetRundomGun();
+                if (predosli < zbrane.GetPower()) 
+                {
+                    player.setPlayerStarts("Sila", zbrane.GetPower());
+                }
                 Console.WriteLine("Poklad");
                 Console.ReadLine();
                 continuing();
@@ -206,10 +213,9 @@ namespace DungonsAndDragons
                 }
             }
             void Combat(int sila){
-                Random randomPlayer = new Random();
-                int random_numPlayer = randomPlayer.Next(1, 7);
+                
+                int random_numPlayer = random.Next(1, 7);
                 Console.WriteLine(random_numPlayer);
-                Random random = new Random();
                 int random_num = random.Next(1, 7);
                 int playerDMG = (random_numPlayer * player.getPlayerStats("Sila"));
                 int priseraDMG = (random_num * sila);

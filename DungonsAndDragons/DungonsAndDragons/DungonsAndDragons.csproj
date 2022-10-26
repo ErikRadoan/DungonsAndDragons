@@ -45,9 +45,12 @@
   <ItemGroup>
     <Compile Include="Dungon.cs" />
     <Compile Include="Jedlo.cs" />
+    <Compile Include="zbraneFolder\Knife.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Zbrane.cs" />
+    <Compile Include="zbraneFolder\Sword.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
