@@ -13,6 +13,7 @@ namespace DungonsAndDragons
         Random random;
         Knife knife;
         Sword sword;
+        Katana katana;
         
         public Zbrane()
         {
@@ -21,6 +22,7 @@ namespace DungonsAndDragons
             random = new Random();
             knife = new Knife();
             sword = new Sword();
+            katana = new Katana();
         }
         
         
@@ -45,7 +47,7 @@ namespace DungonsAndDragons
         
         public void GetRundomGun() 
         {
-            int kolkataZbran = random.Next(0, 2);
+            int kolkataZbran = random.Next(0, 3);
             switch (kolkataZbran)
             {
                 case 0:
@@ -57,20 +59,32 @@ namespace DungonsAndDragons
                     }
                     else
                     {
-                        Console.WriteLine("Dostal si " + knife.name() + "ale už máš silnejšiu zbraň!");
+                        Console.WriteLine("Dostal si " + knife.name() + " ale už máš silnejšiu zbraň!");
                     }
                     
                     break;
                 case 1:
                     if (currentGunPower < sword.sila())
                     {
-                        currentGunName = knife.name();
-                        currentGunPower = knife.sila();
+                        currentGunName = sword.name();
+                        currentGunPower = sword.sila();
                         Console.WriteLine("Dostal si " + sword.name());
                     }
                     else
                     {
-                        Console.WriteLine("Dostal si " + sword.name() + "ale už máš silnejšiu zbraň!");
+                        Console.WriteLine("Dostal si " + sword.name() + " ale už máš silnejšiu zbraň!");
+                    }
+                    break;
+                case 2:
+                    if (currentGunPower < katana.sila())
+                    {
+                        currentGunName = katana.name();
+                        currentGunPower = katana.sila();
+                        Console.WriteLine("Dostal si katanu");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Dostal si katanu ale už máš silnejšiu zbraň!");
                     }
                     break;
             }

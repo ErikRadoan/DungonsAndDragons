@@ -13,13 +13,14 @@ namespace DungonsAndDragons
             Dungon dungon = new Dungon();
             Zbrane zbrane = new Zbrane();
             Player player = new Player();
+            Jedlo jedlo = new Jedlo();
             Random random = new Random();
 
             startGame();
 
             void startGame()
             {
-
+                player.setPlayerStarts("Sila", zbrane.GetPower());
                 string pokracovanie;
                 Console.WriteLine("Vytaj v dungons and dragons !");
                 Console.WriteLine("Ak chceš pokračovať napíš: \"pokracuj\"");
@@ -56,16 +57,19 @@ namespace DungonsAndDragons
 
             void continuing()
             {
+                Console.Clear();
                 string pokracovanie;
-                Console.WriteLine("Ak chceš ísť do ďaľšej miestnosti napíš \"pokracuj\"");
+                Console.WriteLine("Ak chceš ísť do ďaľšej miestnosti napíš \"pokracuj\" [-1 energia]");
                 Console.WriteLine("Ak chceš odísť z dungenu napíš: \"odist\"!");
-                Console.WriteLine("Ak si chceš pezreť inventár napíš: \"inv\"");
+                Console.WriteLine("Ak si chceš pezreť inventár a stats napíš: \"inv\"");
+                Console.WriteLine("Ak chceš niečo v inventári pouiť napíš: \"use\"");
                 pokracovanie = Console.ReadLine();
 
                 switch (pokracovanie)
                 {
                     case "pokracuj":
                         Console.WriteLine("Vsupujes do ďalšej miestnosti");
+                        player.setPlayerStarts("Energia", player.getPlayerStats("Energia") - 1);
                         Console.ReadLine();
                         Console.Clear();
                         vstupDoMiestnosti(dungon.genarateRooms());
@@ -77,9 +81,20 @@ namespace DungonsAndDragons
                     case "inv":
                         Console.Clear();
                         Console.WriteLine("inv");
+                        Console.WriteLine("Máš " + player.getPlayerStats("HP") + " životov.");
+                        Console.WriteLine("Máš " + player.getPlayerStats("Sila") + " sily.");
+                        Console.WriteLine("Máš " + player.getPlayerStats("Energia") + " energie.");
+                        Console.WriteLine("Máš " + player.getPlayerStats("Gold") + " goldu");
+                        jedlo.VipisJedla();
                         Console.ReadLine();
                         Console.Clear();
                         continuing();
+                        break;
+                    case "use":
+                        int id;
+                        Console.WriteLine("Napíš ID itemu (tie nájdeš v inventári <?>)");
+                        id = Convert.ToInt32(Console.ReadLine());
+                        jedlo.Use(id);
                         break;
                     default:
                         Console.Clear();
@@ -121,6 +136,7 @@ namespace DungonsAndDragons
 
             void miestPasca()
             {
+                Console.Clear();
                 string pasca = "";
                 int rand_num = random.Next(1, 5);
                 switch (rand_num)
@@ -145,29 +161,35 @@ namespace DungonsAndDragons
 
                 }
                 Console.WriteLine("V miestnosti " + pasca);
+                Console.ReadLine();
+                Console.Clear();
                 continuing();
             }
             void miestpoklad()
             {
+                Console.Clear();
                 int predosli = zbrane.GetPower();
                 zbrane.GetRundomGun();
                 if (predosli < zbrane.GetPower()) 
                 {
                     player.setPlayerStarts("Sila", zbrane.GetPower());
                 }
-                Console.WriteLine("Poklad");
                 Console.ReadLine();
+                Console.Clear();
                 continuing();
             }
             void miestPrazdna()
             {
+                Console.Clear();
                 Console.WriteLine("Miestnosť je úplne prázdna [-1 energia]");
                 player.setPlayerStarts("Energia", player.getPlayerStats("Energia") - 1);
                 Console.ReadLine();
+                Console.Clear();
                 continuing();
             }
             void miestPrisera()
             {
+                Console.Clear();
                 Random rd = new Random();
                 int rand_num = rd.Next(1, 7);
                 switch (rand_num)
