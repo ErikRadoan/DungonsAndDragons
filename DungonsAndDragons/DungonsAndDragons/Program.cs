@@ -76,7 +76,9 @@ namespace DungonsAndDragons
                         break;
                     case "odist":
                         Console.Clear();
-                        startGame();
+                        Console.WriteLine("Ďakujem za hranie!");
+                        Console.WriteLine("Na konci si mal: " + player.getPlayerStats("Gold") + " goldu.");
+                        Console.ReadLine();
                         break;
                     case "inv":
                         Console.Clear();
@@ -91,10 +93,20 @@ namespace DungonsAndDragons
                         continuing();
                         break;
                     case "use":
-                        int id;
+                        string id;
                         Console.WriteLine("Napíš ID itemu (tie nájdeš v inventári <?>)");
-                        id = Convert.ToInt32(Console.ReadLine());
-                        jedlo.Use(id);
+                        id = Console.ReadLine();
+                        bool isNumeric = int.TryParse(id, out int n);
+                        if(isNumeric == false) 
+                        {
+                            Console.WriteLine("Nezadal si valídne číslo");
+                        }
+                        else
+                        {
+                            jedlo.Use(Convert.ToInt32(id));
+                        }
+                        Console.ReadLine();
+                        continuing();
                         break;
                     default:
                         Console.Clear();
@@ -152,7 +164,7 @@ namespace DungonsAndDragons
                         break;
                     case 3:
                         pasca = "bol acid [- 1 Sila do buduceho fightu]";
-                        player.setPlayerStarts("Sila", player.getPlayerStats("Sila") - 1);
+                        player.EffectedByPoison(true);
                         break;
                     case 4:
                         pasca = "bol waterfall [- 10% gold]";
@@ -168,12 +180,20 @@ namespace DungonsAndDragons
             void miestpoklad()
             {
                 Console.Clear();
-                int predosli = zbrane.GetPower();
-                zbrane.GetRundomGun();
-                if (predosli < zbrane.GetPower()) 
-                {
-                    player.setPlayerStarts("Sila", zbrane.GetPower());
+                int foodOrItem = random.Next(1, 3);
+                if(foodOrItem == 1) {
+                    int predosli = zbrane.GetPower();
+                    zbrane.GetRundomGun();
+                    if (predosli < zbrane.GetPower())
+                    {
+                        player.setPlayerStarts("Sila", zbrane.GetPower());
+                    }
                 }
+                else
+                {
+                    jedlo.RandomFood();
+                }
+                
                 Console.ReadLine();
                 Console.Clear();
                 continuing();
@@ -182,7 +202,6 @@ namespace DungonsAndDragons
             {
                 Console.Clear();
                 Console.WriteLine("Miestnosť je úplne prázdna [-1 energia]");
-                player.setPlayerStarts("Energia", player.getPlayerStats("Energia") - 1);
                 Console.ReadLine();
                 Console.Clear();
                 continuing();
@@ -235,56 +254,68 @@ namespace DungonsAndDragons
                 }
             }
             void Combat(int sila){
-                
-                int random_numPlayer = random.Next(1, 7);
-                Console.WriteLine(random_numPlayer);
-                int random_num = random.Next(1, 7);
-                int playerDMG = (random_numPlayer * player.getPlayerStats("Sila"));
-                int priseraDMG = (random_num * sila);
-                Console.WriteLine(random_num);
-                if (playerDMG > priseraDMG) 
+                Console.WriteLine("Ak chceš utiecť napíš: \"ano\" [- 3 energie]");
+                string moznost = Console.ReadLine();
+                if (moznost == "ano")
                 {
-                    string protiKomuFightil = "";
-                    switch (sila)
-                    {
-                        case 1:
-                            protiKomuFightil = "[+ 5 gold]";
-                            player.setPlayerStarts("Gold", (player.getPlayerStats("Gold") + 5));
-                            break;
-                        case 2:
-                            protiKomuFightil = "[+ 15 gold]";
-                            player.setPlayerStarts("Gold", (player.getPlayerStats("Gold") + 15));
-                            break;
-                        case 3:
-                            protiKomuFightil = "[+ 30 gold]";
-                            player.setPlayerStarts("Gold", (player.getPlayerStats("Gold") + 30));
-                            break;
-                        case 4:
-                            protiKomuFightil = "[+ 50 gold]";
-                            player.setPlayerStarts("Gold", (player.getPlayerStats("Gold") + 50));
-                            break;
-                        case 5:
-                            protiKomuFightil = "[+ 80 gold]";
-                            player.setPlayerStarts("Gold", (player.getPlayerStats("Gold") + 80));
-                            break;
-                        case 8:
-                            protiKomuFightil = "[+ 300 gold]";
-                            player.setPlayerStarts("Gold", (player.getPlayerStats("Gold") + 300));
-                            break;
-                    }
-                    Console.WriteLine("Vyhral si! " + protiKomuFightil);
-                    Console.Read();
-                    Console.Clear();
+                    player.setPlayerStarts("Energia", player.getPlayerStats("Energia") - 3);
                     continuing();
                 }
                 else
                 {
-                    Console.WriteLine("Prehral si, strácaš život a pokračuješ v súboji [- 1 zivot]");
-                    Console.Read();
-                    Console.Clear();
-                    player.setPlayerStarts("HP", player.getPlayerStats("HP") - 1);
-                    Combat(sila);
+                    int random_numPlayer = random.Next(1, 7);
+                    Console.WriteLine(random_numPlayer);
+                    int random_num = random.Next(1, 7);
+                    int playerDMG = (random_numPlayer * player.getPlayerStats("Sila"));
+                    int priseraDMG = (random_num * sila);
+                    Console.WriteLine(random_num);
+                    if (playerDMG > priseraDMG)
+                    {
+                        string protiKomuFightil = "";
+                        switch (sila)
+                        {
+                            case 1:
+                                protiKomuFightil = "[+ 5 gold]";
+                                player.setPlayerStarts("Gold", (player.getPlayerStats("Gold") + 5));
+                                break;
+                            case 2:
+                                protiKomuFightil = "[+ 15 gold]";
+                                player.setPlayerStarts("Gold", (player.getPlayerStats("Gold") + 15));
+                                break;
+                            case 3:
+                                protiKomuFightil = "[+ 30 gold]";
+                                player.setPlayerStarts("Gold", (player.getPlayerStats("Gold") + 30));
+                                break;
+                            case 4:
+                                protiKomuFightil = "[+ 50 gold]";
+                                player.setPlayerStarts("Gold", (player.getPlayerStats("Gold") + 50));
+                                break;
+                            case 5:
+                                protiKomuFightil = "[+ 80 gold]";
+                                player.setPlayerStarts("Gold", (player.getPlayerStats("Gold") + 80));
+                                break;
+                            case 8:
+                                protiKomuFightil = "[+ 300 gold]";
+                                player.setPlayerStarts("Gold", (player.getPlayerStats("Gold") + 300));
+                                break;
+                        }
+                        Console.WriteLine("Vyhral si! " + protiKomuFightil);
+                        Console.Read();
+                        Console.Clear();
+                        player.EffectedByPoison(false);
+                        player.EffectedByPower(false);
+                        continuing();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Prehral si, strácaš život a pokračuješ v súboji [- 1 zivot]");
+                        Console.Read();
+                        Console.Clear();
+                        player.setPlayerStarts("HP", player.getPlayerStats("HP") - 1);
+                        Combat(sila);
+                    }
                 }
+                
             }
         }
         

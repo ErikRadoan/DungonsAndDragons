@@ -39,15 +39,15 @@ namespace DungonsAndDragons
                     break;
                 case 4:
                     Console.WriteLine("Dostal si HP potion [+2 zivoty]");
-                    appleCount++;
+                    hpPotionCount++;
                     break;
                 case 5:
                     Console.WriteLine("Dostal si GIGA potion [max energy + max zivoty]");
-                    appleCount++;
+                    gigaPotionCount++;
                     break;
                 case 6:
                     Console.WriteLine("Dostal si power potion [+ 2 sily na budúci fight]");
-                    appleCount++;
+                    powerPotionCount++;
                     break;
             }
         }
@@ -60,7 +60,7 @@ namespace DungonsAndDragons
                     if (appleCount > 0) 
                     {
                         appleCount--;
-                        player.setPlayerStarts("Energia", player.getPlayerStats("Enegia") + 3);
+                        player.setPlayerStarts("Energia", player.getPlayerStats("Energia") + 3);
                     }
                     else
                     {
@@ -72,7 +72,7 @@ namespace DungonsAndDragons
                     if (breadCount > 0)
                     {
                         breadCount--;
-                        player.setPlayerStarts("Energia", player.getPlayerStats("Enegia") + 5);
+                        player.setPlayerStarts("Energia", (player.getPlayerStats("Energia") + 5));
                     }
                     else
                     {
@@ -83,7 +83,7 @@ namespace DungonsAndDragons
                     if (chickenCount > 0)
                     {
                         chickenCount--;
-                        player.setPlayerStarts("Energia", 12 - player.getPlayerStats("Enegia"));
+                        player.setPlayerStarts("Energia", (12 - player.getPlayerStats("Energia")));
                     }
                     else
                     {
@@ -106,7 +106,7 @@ namespace DungonsAndDragons
                     {
                         gigaPotionCount--;
                         player.setPlayerStarts("HP", 5 - player.getPlayerStats("HP"));
-                        player.setPlayerStarts("Energia", 12 - player.getPlayerStats("Enegia"));
+                        player.setPlayerStarts("Energia", 12 - player.getPlayerStats("Energia"));
                     }
                     else
                     {
@@ -117,7 +117,7 @@ namespace DungonsAndDragons
                     if (powerPotionCount > 0)
                     {
                         powerPotionCount--;
-                        //
+                        player.EffectedByPower(true);
                     }
                     else
                     {
